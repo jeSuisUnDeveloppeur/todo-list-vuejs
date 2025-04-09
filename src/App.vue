@@ -1,5 +1,5 @@
 <template>
-  <h1>Bienvenue sur la todo list</h1>
+  <h1>Bienvenue sur la todo list VueJs</h1>
   <form action="" @submit.prevent="addTodo">
     <input 
       type="text" 
@@ -11,8 +11,8 @@
   </form>
   <p v-if="todos.length === 0">il n'y a pas de todos pour l'instant</p>
   <ul v-else>
-    <li v-for="(todo,index) in sortedTodos" :key="todo.date" :class="{'text-decoration-line-through opacity-50':todo.completed}">
-      {{ todo.title }} <input type="checkbox" :name="`todo${index}`" :id="`todo${index}`" v-model="todo.completed"/>
+    <li v-for="(todo,index) in sortedTodos" :key="todo.date">
+      <Checkbox :label="todo.title" :name="`todo${index}`" :id="`todo${index}`" v-model="todo.completed" :class="{'text-decoration-line-through opacity-50':todo.completed}"/>
     </li>
   </ul>
   <label>
@@ -21,10 +21,12 @@
   </label>
   <p v-if="remainingTodos > 0 "> {{ remainingTodos }} tâche{{remainingTodos > 1 ?'s':''}} à faire</p>
   
+  
 </template>
 
 <script setup>
 import { ref,computed } from "vue";
+import Checkbox from "./components/Checkbox.vue";
 const todos = ref([
   {
     title: "faire les courses",
